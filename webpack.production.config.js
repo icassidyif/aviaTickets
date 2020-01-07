@@ -17,7 +17,7 @@ module.exports = {
   },
   mode: 'production',
   context: path.resolve(__dirname, 'src'),
-  // This option allows to combine vendors library to one common file.
+  // This option allows to combine vendors libraries to one common file.
   optimization: {
     splitChunks: {
       chunks: "all",
