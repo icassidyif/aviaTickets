@@ -1,11 +1,45 @@
 import locations from "./store/locations";
+import './libs';
 import '../css/style.sass';
+import formUI from "./views/form";
+import currencyUI from "./views/currency";
 
-locations.init().then(res => {
-  console.log(locations.getCitiesByCountryCode(('UA')));
+// formlocations.init().then(res => {
+//   console.log(locations);
+// });
+
+document.addEventListener('DOMContentLoaded', (e) => {
+  initApp();
+  const form = formUI.form;
+
+  //Events
+  form.addEventListener('submit',(e) => {
+    e.preventDefault();
+    onFormSubmit();
+  });
+  //handlers
+  async function initApp() {
+    await locations.init();
+    formUI.setAutoCompleteData(locations.shortCitiesList);
+  }
+
+  async function onFormSubmit() {
+  //  Getting data from inputs
+    const origin = locations.getCityCodeByKey(formUI.originValue);
+    const destination = locations.getCityCodeByKey(formUI.destinationValue);
+    const depart_date = formUI.departDateValue;
+    const return_date = formUI.returnDateValue;
+    const currency = currencyUI.currencyValue;
+  //  CODE, CODE, 2020-12, 2020-15
+    await locations.fetchTickets({
+      origin,
+      destination,
+      depart_date,
+      return_date,
+      currency
+    });
+  }
 });
-
-
 
 // Show WEBPACK mode into console
 if(process.env.NODE_ENV === 'production') {

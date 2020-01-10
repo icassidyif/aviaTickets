@@ -25,7 +25,27 @@ class Api {
     }
   }
 
-  prices(params) {}
+  async prices(params) {
+    try {
+      const response = await axios.get(`${this.url}/prices/cheap`, {
+        params
+      });
+      return Promise.resolve(response.data);
+    }catch (e) {
+      console.log(e);
+      return Promise.reject(e);
+    }
+  }
+
+  async airlines() {
+    try {
+      const response = await axios.get(`${this.url}/airlines`);
+      return Promise.resolve(response.data);
+    }catch (e) {
+      console.log(e);
+      return Promise.reject(e);
+    }
+  }
 }
 
 const api = new Api(config);
