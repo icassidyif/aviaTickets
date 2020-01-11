@@ -1,8 +1,11 @@
 import locations from "./store/locations";
+import favorites from "./store/favorites";
 import './libs';
 import '../css/style.sass';
 import formUI from "./views/form";
+import ticketsUI from "./views/tickets";
 import currencyUI from "./views/currency";
+import favoriteDropDownUI from "./views/favoriteDropDown";
 
 // formlocations.init().then(res => {
 //   console.log(locations);
@@ -17,6 +20,7 @@ document.addEventListener('DOMContentLoaded', (e) => {
     e.preventDefault();
     onFormSubmit();
   });
+
   //handlers
   async function initApp() {
     await locations.init();
@@ -38,6 +42,8 @@ document.addEventListener('DOMContentLoaded', (e) => {
       return_date,
       currency
     });
+
+    ticketsUI.renderTickets(locations.lastSearch);
   }
 });
 

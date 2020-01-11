@@ -1,12 +1,15 @@
 import api from "../services/apiService";
+import {formatDate} from "../helpers/date";
 
 class Locations {
-  constructor(api) {
+  constructor(api, helpers) {
     this.api = api;
     this.countries = null;
     this.cities = null;
     this.shortCitiesList = {};
     this.airlines = {};
+    this.lastSearch = {};
+    this.formatDate = helpers.formatDate;
   }
 
   async init(){
@@ -65,9 +68,27 @@ class Locations {
     }, {})
   }
 
+  convertTickets(tickets) {
+    return Object.values(tickets).map(ticket => {
+      return {
+        ...ticket,
+        origin_name: this.getCityNameByCode(ticket.origin),
+        destination_name: this.getCityNameByCode(ticket.destination),
+        airline_logo: this.getAirlineLogoByCode(ticket.airline),
+        airline_name: this.getAirlineNameByCode(ticket.airline),
+        departure_at: this.formatDate(ticket.departure_at, 'dd MMM yyyy hh:mm'),
+        return_at: this.formatDate(ticket.return_at, 'dd MMM yyyy hh:mm')
+      }
+    })
+  }
+
   getCityCodeByKey(key) {
     const city = Object.values(this.cities).find((item) => item.full_name === key);
     return city.code;
+  }
+
+  getCityNameByCode(code) {
+    return this.cities[code].name;
   }
 
   getCountryNameByCode (code){
@@ -84,12 +105,12 @@ class Locations {
 
   async fetchTickets(params) {
     const response = await this.api.prices(params);
-    console.log(response);
+    this.lastSearch = this.convertTickets(response.data);
   }
 }
 
 
-const locations = new Locations(api);
+const locations = new Locations(api, {formatDate});
 export default locations;
 
 // data for autocomplete = {'city, country': null}
