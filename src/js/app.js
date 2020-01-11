@@ -7,10 +7,6 @@ import ticketsUI from "./views/tickets";
 import currencyUI from "./views/currency";
 import favoriteDropDownUI from "./views/favoriteDropDown";
 
-// formlocations.init().then(res => {
-//   console.log(locations);
-// });
-
 document.addEventListener('DOMContentLoaded', (e) => {
   initApp();
   const form = formUI.form;
@@ -19,6 +15,14 @@ document.addEventListener('DOMContentLoaded', (e) => {
   form.addEventListener('submit',(e) => {
     e.preventDefault();
     onFormSubmit();
+  });
+  //add favorite
+  ticketsUI.container.addEventListener('click', (e)=>{
+    if(e.target.classList.contains('add-favorite')){
+      // let ticket = JSON.parse(e.target.dataset.userFavotite);
+      // favoriteTickets.setFavorite(ticket);
+      console.log(ticket);
+    }
   });
 
   //handlers

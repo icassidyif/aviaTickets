@@ -1,6 +1,4 @@
 import currencyUI from "./currency";
-import favorites from "../store/favorites";
-import favoriteDropDownUI from "./favoriteDropDown";
 
 class TicketsUI {
   constructor(currency) {
@@ -22,14 +20,14 @@ class TicketsUI {
     this.container.insertAdjacentHTML('afterbegin', fragment);
 
     //Event assign
-    const allBtnFavorite = document.querySelectorAll('.add-favorite');
-    allBtnFavorite.forEach(btn => {
-      btn.addEventListener('click', (e) => {
-        favorites.store.push(e.target.offsetParent.innerHTML);
-        console.log(favorites.store);
-        favoriteDropDownUI.renderFavoriteTickets(favorites.store);
-      })
-    })
+    // const allBtnFavorite = document.querySelectorAll('.add-favorite');
+    // allBtnFavorite.forEach(btn => {
+    //   btn.addEventListener('click', (e) => {
+    //     favorites.store.push(e.target.offsetParent.innerHTML);
+    //     console.log(favorites.store);
+    //     favoriteDropDownUI.renderFavoriteTickets(favorites.store);
+    //   })
+    // })
   }
 
   clearContainer() {
