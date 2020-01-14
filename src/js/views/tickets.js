@@ -18,16 +18,6 @@ class TicketsUI {
       fragment += template;
     });
     this.container.insertAdjacentHTML('afterbegin', fragment);
-
-    //Event assign
-    // const allBtnFavorite = document.querySelectorAll('.add-favorite');
-    // allBtnFavorite.forEach(btn => {
-    //   btn.addEventListener('click', (e) => {
-    //     favorites.store.push(e.target.offsetParent.innerHTML);
-    //     console.log(favorites.store);
-    //     favoriteDropDownUI.renderFavoriteTickets(favorites.store);
-    //   })
-    // })
   }
 
   clearContainer() {
@@ -73,7 +63,7 @@ class TicketsUI {
           <span class="ticket-transfers">Пересадок: ${ticket.transfers}</span>
           <span class="ticket-flight-number">Номер рейсу: ${ticket.flight_number}</span>
         </div>
-        <a class="waves-effect waves-light btn-small green darken-1 add-favorite ml-auto">Add to favorites</a>
+        <a class="waves-effect waves-light btn-small green darken-1 add-favorite ml-auto" data-current-ticket='${JSON.stringify(ticket)}'>Add to favorites</a>
       </div>
     </div>
     `;

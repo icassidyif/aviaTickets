@@ -46,7 +46,7 @@ class FavoriteDropDownUI {
           <span class="ticket-transfers">Пересадок: ${ticket.transfers}</span>
           <span class="ticket-flight-number">Номер рейса: ${ticket.flight_number}</span>
         </div>
-        <a class="waves-effect waves-light btn-small pink darken-3 delete-favorite ml-auto">Delete</a>
+        <a class="waves-effect waves-light btn-small pink darken-3 delete-favorite ml-auto" data-current-ticket='${JSON.stringify(ticket)}'>Delete</a>
       </div>
      </div>
     `

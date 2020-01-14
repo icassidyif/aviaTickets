@@ -19,9 +19,17 @@ document.addEventListener('DOMContentLoaded', (e) => {
   //add favorite
   ticketsUI.container.addEventListener('click', (e)=>{
     if(e.target.classList.contains('add-favorite')){
-      // let ticket = JSON.parse(e.target.dataset.userFavotite);
-      // favoriteTickets.setFavorite(ticket);
-      console.log(ticket);
+      let ticket = JSON.parse(e.target.dataset.currentTicket);
+      favorites.addTicketToStore(ticket);
+      favoriteDropDownUI.renderFavoriteTickets(favorites.store);
+    }
+  });
+  //delete favorite
+  favoriteDropDownUI.container.addEventListener('click', (e)=>{
+    if(e.target.classList.contains('delete-favorite')){
+      let ticket = JSON.parse(e.target.dataset.currentTicket);
+      favorites.removeTicketFromStore(ticket);
+      favoriteDropDownUI.renderFavoriteTickets(favorites.store);
     }
   });
 
