@@ -38,6 +38,10 @@ class FormUI {
     this.destinationAutocomplete.updateData(data);
   }
 
+  isValidInput() {
+    return !(!this.originValue || !this.destinationValue);
+  }
+
 }
 
 const formUI = new FormUI(getAutocompleteInstance, getDatePickerInstance);

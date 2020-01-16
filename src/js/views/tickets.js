@@ -4,6 +4,7 @@ class TicketsUI {
   constructor(currency) {
     this.container = document.querySelector('.tickets-section .row');
     this.getCurrencySymbol = currency.getCurrencySymbol.bind(currency);
+    this.renderedItems = {}
   }
 
   renderTickets(tickets) {
@@ -18,6 +19,7 @@ class TicketsUI {
       fragment += template;
     });
     this.container.insertAdjacentHTML('afterbegin', fragment);
+    this.renderedItems = document.querySelectorAll('.add-favorite');
   }
 
   clearContainer() {
